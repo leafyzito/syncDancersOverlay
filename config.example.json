@@ -1,7 +1,11 @@
 {
     "twitch": {
-        "channel": "",
-        "customAvatarUrls": []
+        "channel": "your_channel_name",
+        "customAvatarUrls": [
+            "https://example.com/avatars/avatar1.gif",
+            "https://example.com/avatars/avatar2.gif",
+            "https://example.com/avatars/avatar3.gif"
+        ]
     },
     "display": {
         "avatarSize": 45,
@@ -11,7 +15,7 @@
         "messageMaxLength": 100,
         "messageDuration": 5000,
         "deleteIdleUsers": true,
-        "deleteIdleUsersAfterSeconds": 15
+        "deleteIdleUsersAfterSeconds": 60
     },
     "animation": {
         "movementInterval": 10000,
@@ -30,6 +34,6 @@
         "messageBubbleBackground": "rgba(0, 0, 0, 0.8)",
         "overlayHeight": 100,
         "overlayBottomPadding": 40,
-        "scale": 1.0
+        "scale": 1.1
     }
 }

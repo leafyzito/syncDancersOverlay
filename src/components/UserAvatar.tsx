@@ -105,6 +105,11 @@ export const UserAvatar = ({ user }: UserAvatarProps) => {
                 x: user.position.x,
                 y: user.position.y
             }}
+            exit={{
+                scale: 0,
+                opacity: 0,
+                transition: { duration: 0.5 }
+            }}
             transition={{ duration: config.animation.transitionDuration }}
         >
             <AvatarImage src={user.syncAvatar} alt={user.username + "'Sync avatar"} />

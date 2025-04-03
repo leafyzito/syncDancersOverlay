@@ -10,6 +10,7 @@ Um overlay personalizável para streams que exibe mensagens do chat da Twitch co
 - Balões de mensagem com mensagens dos usuários
 - Animações e transições suaves
 - Comandos interativos para o chat
+- Limpeza automática de usuários inativos com animação de saída
 
 ## Configuração
 
@@ -38,7 +39,9 @@ O overlay pode ser personalizado através do arquivo `config.json`. Aqui está u
     "showTwitchAvatars": true,       // Se deve mostrar avatares da Twitch
     "showMessages": true,            // Se deve mostrar balões de mensagem
     "messageMaxLength": 100,         // Comprimento máximo dos balões de mensagem
-    "messageDuration": 5000          // Quanto tempo as mensagens ficam visíveis (ms)
+    "messageDuration": 5000,         // Quanto tempo as mensagens ficam visíveis (ms)
+    "deleteIdleUsers": true,         // Se deve remover usuários inativos automaticamente
+    "deleteIdleUsersAfterSeconds": 60 // Tempo em segundos após o qual usuários inativos são removidos
   }
 }
 ```
@@ -92,7 +95,14 @@ O overlay pode ser personalizado através do arquivo `config.json`. Aqui está u
 
 ## Comandos para o chat
 
-- `!reloadavatar` - Vai aleatorizar o avatar para o usuário que enviou o comando
+- `!reloadavatar` - Vai recarregar o avatar do usuário que enviou o comando
+
+## Comportamento dos Avatares
+
+- Os avatares se movem aleatoriamente a cada intervalo configurado
+- Mensagens aparecem em balões de fala e desaparecem após o tempo configurado
+- Usuários inativos são removidos automaticamente após o tempo configurado (se habilitado)
+- Ao serem removidos, os avatares têm uma animação suave de saída (escala e fade out)
 
 ## Desenvolvimento
 

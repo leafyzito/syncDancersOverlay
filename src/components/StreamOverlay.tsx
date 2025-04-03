@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { TwitchChatService } from '../services/twitchChat';
 import { configService } from '../services/config';
 import { getRandomPosition } from '../utils/position';
+import { AnimatePresence } from 'framer-motion';
 
 const OverlayContainer = styled.div`
   position: fixed;
@@ -64,11 +65,29 @@ export const StreamOverlay = () => {
         return () => clearInterval(interval);
     }, []);
 
+    // Clean up idle users
+    useEffect(() => {
+        if (!config.display.deleteIdleUsers) return;
+
+        const cleanupInterval = setInterval(() => {
+            const now = Date.now();
+            setUsers(prevUsers =>
+                prevUsers.filter(user =>
+                    now - user.lastMessageTimestamp < config.display.deleteIdleUsersAfterSeconds * 1000
+                )
+            );
+        }, 2000); // Check every 5 seconds
+
+        return () => clearInterval(cleanupInterval);
+    }, [config.display.deleteIdleUsers, config.display.deleteIdleUsersAfterSeconds]);
+
     return (
         <OverlayContainer theme={config.ui}>
-            {users.map(user => (
-                <UserAvatar key={user.id} user={user} />
-            ))}
+            <AnimatePresence>
+                {users.map(user => (
+                    <UserAvatar key={user.id} user={user} />
+                ))}
+            </AnimatePresence>
         </OverlayContainer>
     );
 }; 
