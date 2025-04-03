@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { StreamOverlay } from './components/StreamOverlay';
+import { Toast } from './components/Toast';
 
 const AppContainer = styled.div`
   width: 100vw;
@@ -23,6 +24,7 @@ function App() {
         <p>Watch the avatars move around!</p> */}
       </Content>
       <StreamOverlay />
+      <Toast />
     </AppContainer>
   );
 }
