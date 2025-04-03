@@ -9,4 +9,5 @@ export interface User {
     };
     color: string;
     lastMessage?: string;
+    lastMessageChannel?: string;
 } 

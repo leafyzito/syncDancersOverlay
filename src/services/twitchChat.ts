@@ -69,7 +69,8 @@ export class TwitchChatService {
                     syncAvatar: await getSyncAvatar(username, skipAvatarCache),
                     position: existingUser?.position || getRandomPosition(),
                     color: tags['color'] || existingUser?.color || '',
-                    lastMessage: message
+                    lastMessage: message,
+                    lastMessageChannel: channel
                 };
                 console.log(`${existingUser ? 'Updated' : 'Created'} user object:`, user);
                 this.connectedUsers.set(user.id, user);
