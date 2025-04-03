@@ -21,10 +21,15 @@ export const getTwitchAvatar = async (username: string, skipCache: boolean = fal
         return cachedTwitchAvatar;
     }
 
-    const api_url = `https://api.ivr.fi/v2/twitch/user?login=${username}`;
-    const response = await fetch(api_url);
+    const api_url = `https://api.twitch.tv/helix/users?login=${username}`;
+    const response = await fetch(api_url, {
+        headers: {
+            'Client-ID': import.meta.env.VITE_TWITCH_CLIENT_ID,
+            'Authorization': `Bearer ${import.meta.env.VITE_TWITCH_OAUTH_TOKEN}`
+        }
+    });
     const data = await response.json();
-    const twitchAvatar = data[0]["logo"];
+    const twitchAvatar = data.data[0].profile_image_url;
     twitchAvatarCache.set(username, twitchAvatar);
     return twitchAvatar;
 } 

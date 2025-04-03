@@ -5,12 +5,17 @@ import { getTwitchAvatar, getSyncAvatar } from './avatarService';
 import { ToastService } from './toastService';
 
 export class TwitchChatService {
+    private static instance: TwitchChatService | null = null;
     private client: tmi.Client;
     private onUserMessage: (user: User) => void;
     private connectedUsers: Map<string, User>;
     private toastService: ToastService;
 
-    constructor(onUserMessage: (user: User) => void) {
+    private constructor(onUserMessage: (user: User) => void) {
+        if (TwitchChatService.instance) {
+            throw new Error('TwitchChatService is a singleton. Use getInstance() instead.');
+        }
+        console.log('TwitchChatService instance created');
         this.onUserMessage = onUserMessage;
         this.connectedUsers = new Map();
         this.toastService = ToastService.getInstance();
@@ -39,10 +44,12 @@ export class TwitchChatService {
             this.toastService.show(`Successfully connected to ${channel}`, 'success');
         });
 
+        this.client.on('disconnected', () => {
+            this.toastService.show(`Disconnected from ${channel}`, 'error');
+        });
 
         this.client.on('message', async (channel, tags, message, self) => {
             if (self) return;
-            // console.log('Received message:', { channel, username: tags['display-name'], message });
 
             let skipAvatarCache = false;
             if (message.toLowerCase() == "!reloadavatar") {
@@ -75,8 +82,21 @@ export class TwitchChatService {
         });
     }
 
+    public static getInstance(onUserMessage?: (user: User) => void): TwitchChatService {
+        if (!TwitchChatService.instance) {
+            if (!onUserMessage) {
+                throw new Error('onUserMessage callback is required for first instance creation');
+            }
+            TwitchChatService.instance = new TwitchChatService(onUserMessage);
+        }
+        return TwitchChatService.instance;
+    }
+
     public disconnect() {
-        this.client.disconnect();
+        if (this.client) {
+            this.client.disconnect();
+        }
+        TwitchChatService.instance = null;
     }
 
     public getConnectedUsers(): User[] {

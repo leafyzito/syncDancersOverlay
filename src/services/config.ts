@@ -2,7 +2,6 @@ import defaultConfig from '../../config.json';
 
 export interface TwitchConfig {
     channel: string;
-    useTwitchAvatars: boolean;
     defaultAvatarUrls: string[];
 }
 

@@ -20,7 +20,7 @@ export const StreamOverlay = () => {
 
     useEffect(() => {
         // Initialize Twitch chat service
-        const service = new TwitchChatService((user) => {
+        TwitchChatService.getInstance((user) => {
             setUsers(prevUsers => {
                 const existingUserIndex = prevUsers.findIndex(u => u.id === user.id);
                 if (existingUserIndex >= 0) {
@@ -36,7 +36,8 @@ export const StreamOverlay = () => {
 
         // Cleanup on unmount
         return () => {
-            service.disconnect();
+            // Don't disconnect here, as it would cause issues with Strict Mode
+            // The service will be properly cleaned up when the app is closed
         };
     }, []);
 
