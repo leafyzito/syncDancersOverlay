@@ -2,7 +2,7 @@ import defaultConfig from '../../config.json';
 
 export interface TwitchConfig {
     channel: string;
-    defaultAvatarUrls: string[];
+    customAvatarUrls: string[];
 }
 
 export interface DisplayConfig {
@@ -29,6 +29,7 @@ export interface UIConfig {
     messageBubbleBackground: string;
     overlayHeight: number;
     overlayBottomPadding: number;
+    scale: number;
 }
 
 export interface Config {

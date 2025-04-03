@@ -4,6 +4,7 @@ import { User } from '../types';
 import { useState, useEffect } from 'react';
 import { TwitchChatService } from '../services/twitchChat';
 import { configService } from '../services/config';
+import { getRandomPosition } from '../utils/position';
 
 const OverlayContainer = styled.div`
   position: fixed;
@@ -12,6 +13,12 @@ const OverlayContainer = styled.div`
   right: 0;
   height: ${props => props.theme.overlayHeight}px;
   pointer-events: none;
+  transform-origin: bottom center;
+  transform: scale(${props => props.theme.scale});
+  overflow: visible;
+  margin: 0 ${props => props.theme.overlayBottomPadding}px;
+  // Add a border for debugging
+  // border: 1px solid red;
 `;
 
 export const StreamOverlay = () => {
@@ -20,7 +27,7 @@ export const StreamOverlay = () => {
 
     useEffect(() => {
         // Initialize Twitch chat service
-        TwitchChatService.getInstance((user) => {
+        TwitchChatService.getInstance((user: User) => {
             setUsers(prevUsers => {
                 const existingUserIndex = prevUsers.findIndex(u => u.id === user.id);
                 if (existingUserIndex >= 0) {
@@ -43,14 +50,10 @@ export const StreamOverlay = () => {
 
     // Function to move avatars randomly
     const moveAvatars = () => {
-        const maxX = window.innerWidth - config.display.avatarSize;
         setUsers(prevUsers =>
             prevUsers.map(user => ({
                 ...user,
-                position: {
-                    x: Math.random() * maxX, // Random x position with overlay width as max
-                    y: Math.random() * (config.animation.movementRange.y.max - config.animation.movementRange.y.min) + config.animation.movementRange.y.min // Random y position with min and max from config
-                }
+                position: getRandomPosition()
             }))
         );
     };

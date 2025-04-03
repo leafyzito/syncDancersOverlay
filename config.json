@@ -1,8 +1,7 @@
 {
     "twitch": {
-        "channel": "gocrazybh",
-        "useTwitchAvatars": true,
-        "defaultAvatarUrls": [
+        "channel": "ryujei",
+        "customAvatarUrls": [
             "https://f.feridinha.com/sync/dancers/Avatar01_A.gif",
             "https://f.feridinha.com/sync/dancers/Avatar02_A.gif",
             "https://f.feridinha.com/sync/dancers/Avatar03_A.gif",
@@ -48,6 +47,7 @@
         "tooltipBackground": "rgba(0, 0, 0, 0.8)",
         "messageBubbleBackground": "rgba(0, 0, 0, 0.8)",
         "overlayHeight": 100,
-        "overlayBottomPadding": 40
+        "overlayBottomPadding": 40,
+        "scale": 1.1
     }
 }

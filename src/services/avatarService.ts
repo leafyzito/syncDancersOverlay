@@ -10,7 +10,7 @@ export const getSyncAvatar = async (username: string, skipCache: boolean = false
         return cachedSyncAvatar;
     }
 
-    const randomAvatar = config.twitch.defaultAvatarUrls[Math.floor(Math.random() * config.twitch.defaultAvatarUrls.length)];
+    const randomAvatar = config.twitch.customAvatarUrls[Math.floor(Math.random() * config.twitch.customAvatarUrls.length)];
     syncAvatarCache.set(username, randomAvatar);
     return randomAvatar;
 }

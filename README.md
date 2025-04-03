@@ -5,10 +5,11 @@ Um overlay personalizável para streams que exibe mensagens do chat da Twitch co
 ## Funcionalidades
 
 - Integração em tempo real com o chat da Twitch
-- Avatares animados
+- Avatares animados (Twitch ou customizados)
 - Aparência e comportamento personalizáveis
 - Balões de mensagem com mensagens dos usuários
 - Animações e transições suaves
+- Comandos interativos para o chat
 
 ## Configuração
 
@@ -19,8 +20,11 @@ O overlay pode ser personalizado através do arquivo `config.json`. Aqui está u
 {
   "twitch": {
     "channel": "seu_nome_de_canal",  // O canal da Twitch para conectar
-    "useTwitchAvatars": true,        // Se deve usar avatares da Twitch ou avatar padrão
-    "defaultAvatarUrls": "url"        // URL do avatar padrão quando useTwitchAvatars é false
+    "customAvatarUrls": [           // URLs dos avatares customizados
+      "url1",
+      "url2",
+      // ...
+    ]
   }
 }
 ```
@@ -29,10 +33,11 @@ O overlay pode ser personalizado através do arquivo `config.json`. Aqui está u
 ```json
 {
   "display": {
-    "avatarSize": 40,                // Tamanho dos avatares em pixels
+    "avatarSize": 45,                // Tamanho dos avatares em pixels
     "showUsernames": true,           // Se deve mostrar nomes de usuário abaixo dos avatares
+    "showTwitchAvatars": true,       // Se deve mostrar avatares da Twitch
     "showMessages": true,            // Se deve mostrar balões de mensagem
-    "messageMaxLength": 200,         // Comprimento máximo dos balões de mensagem
+    "messageMaxLength": 100,         // Comprimento máximo dos balões de mensagem
     "messageDuration": 5000          // Quanto tempo as mensagens ficam visíveis (ms)
   }
 }
@@ -42,12 +47,11 @@ O overlay pode ser personalizado através do arquivo `config.json`. Aqui está u
 ```json
 {
   "animation": {
-    "movementInterval": 10000,       // Com que frequência os avatares se movem (ms)
+    "movementInterval": 5000,        // Com que frequência os avatares se movem (ms)
     "movementRange": {
-      "x": { "min": 0, "max": 100 }, // Intervalo de movimento horizontal
       "y": { "min": 0, "max": 60 }   // Intervalo de movimento vertical
     },
-    "transitionDuration": 0.3        // Duração das animações de movimento
+    "transitionDuration": 3          // Duração das animações de movimento (segundos)
   }
 }
 ```
@@ -61,7 +65,8 @@ O overlay pode ser personalizado através do arquivo `config.json`. Aqui está u
     "tooltipBackground": "rgba(0, 0, 0, 0.8)",  // Cor de fundo do tooltip do nome de usuário
     "messageBubbleBackground": "rgba(0, 0, 0, 0.8)",  // Cor de fundo do balão de mensagem
     "overlayHeight": 100,            // Altura da área do overlay
-    "overlayBottomPadding": 20       // Espaçamento a partir do fundo da tela
+    "overlayBottomPadding": 40,      // Espaçamento a partir do fundo da tela
+    "scale": 1.1                     // Escala do overlay (1.0 = tamanho normal, 1.5 = 50% maior, 0.5 = 50% menor)
   }
 }
 ```
@@ -86,14 +91,24 @@ O overlay pode ser personalizado através do arquivo `config.json`. Aqui está u
 3. Configure o tamanho e a posição conforme desejado
 
 ## Comandos para o chat
-!changeavatar - Vai aleatorizar o avatar para o usuário que enviou o comando
+
+- `!reloadavatar` - Vai aleatorizar o avatar para o usuário que enviou o comando
 
 ## Desenvolvimento
 
-- Construído com React + TypeScript + Vite
+- Construído com React 19 + TypeScript + Vite
 - Usa styled-components para estilização
 - Framer Motion para animações
 - tmi.js para integração com chat da Twitch
+- ESLint para linting
+- TypeScript para type safety
+
+### Scripts disponíveis
+
+- `npm run dev` - Inicia o servidor de desenvolvimento
+- `npm run build` - Constrói o projeto para produção
+- `npm run preview` - Previa a build de produção
+- `npm run lint` - Executa o linter
 
 ## Licença
 

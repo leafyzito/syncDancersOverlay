@@ -3,6 +3,7 @@ import { User } from '../types';
 import { configService } from './config';
 import { getTwitchAvatar, getSyncAvatar } from './avatarService';
 import { ToastService } from './toastService';
+import { getRandomPosition } from '../utils/position';
 
 export class TwitchChatService {
     private static instance: TwitchChatService | null = null;
@@ -66,10 +67,7 @@ export class TwitchChatService {
                     username: username,
                     twitchAvatar: await getTwitchAvatar(username, skipAvatarCache),
                     syncAvatar: await getSyncAvatar(username, skipAvatarCache),
-                    position: existingUser?.position || {
-                        x: Math.random() * (window.innerWidth - config.display.avatarSize),
-                        y: Math.random() * (config.animation.movementRange.y.max - config.animation.movementRange.y.min) + config.animation.movementRange.y.min
-                    },
+                    position: existingUser?.position || getRandomPosition(),
                     color: tags['color'] || existingUser?.color || '',
                     lastMessage: message
                 };
@@ -102,4 +100,4 @@ export class TwitchChatService {
     public getConnectedUsers(): User[] {
         return Array.from(this.connectedUsers.values());
     }
-} 
+}
