@@ -37,6 +37,16 @@ const UsernameTooltip = styled.div`
   white-space: nowrap;
   pointer-events: none;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
+
+const TooltipTwitchAvatar = styled.img`
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  object-fit: cover;
 `;
 
 const MessageBubble = styled(motion.div)`
@@ -49,7 +59,8 @@ const MessageBubble = styled(motion.div)`
   padding: 8px 12px;
   border-radius: 16px 16px 16px 4px;
   font-size: 12px;
-  max-width: ${config.display.messageMaxLength}px;
+  max-width: 400px;
+  width: max-content;
   word-wrap: break-word;
   pointer-events: none;
   z-index: 2;
@@ -96,7 +107,7 @@ export const UserAvatar = ({ user }: UserAvatarProps) => {
             }}
             transition={{ duration: config.animation.transitionDuration }}
         >
-            <AvatarImage src={user.avatarUrl} alt={user.username} />
+            <AvatarImage src={user.syncAvatar} alt={user.username + "'Sync avatar"} />
             {config.display.showUsernames && (
                 <UsernameTooltip
                     style={{
@@ -104,6 +115,9 @@ export const UserAvatar = ({ user }: UserAvatarProps) => {
                         fontWeight: '500'
                     }}
                 >
+                    {config.display.showTwitchAvatars && (
+                        <TooltipTwitchAvatar src={user.twitchAvatar} alt={user.username + "'Twitch avatar"} />
+                    )}
                     {user.username}
                 </UsernameTooltip>
             )}
@@ -115,7 +129,8 @@ export const UserAvatar = ({ user }: UserAvatarProps) => {
                         exit={{ scale: 0, y: 10 }}
                         transition={{ duration: 0.2 }}
                     >
-                        {user.lastMessage}
+                        {/* max config.display.messageMaxLength characters */}
+                        {user.lastMessage.slice(0, config.display.messageMaxLength)}
                     </MessageBubble>
                 )}
             </AnimatePresence>

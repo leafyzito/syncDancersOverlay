@@ -9,6 +9,7 @@ export interface TwitchConfig {
 export interface DisplayConfig {
     avatarSize: number;
     showUsernames: boolean;
+    showTwitchAvatars: boolean;
     showMessages: boolean;
     messageMaxLength: number;
     messageDuration: number;

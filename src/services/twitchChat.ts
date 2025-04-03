@@ -1,43 +1,7 @@
 import tmi from 'tmi.js';
 import { User } from '../types';
 import { configService } from './config';
-
-const avatarCache = new Map<string, string>();
-
-const getAvatarUrl = async (username: string, skipCache: boolean = false) => {
-    const config = configService.getConfig();
-
-    // If using Twitch avatars is disabled, return the custom avatar set in the config
-    if (!config.twitch.useTwitchAvatars) {
-        // Check cache first for consistent avatar per user
-        const cachedUrl = avatarCache.get(username);
-        if (cachedUrl && !skipCache) {
-            return cachedUrl;
-        }
-
-        // Assign random avatar from config and cache it
-        const randomAvatar = config.twitch.defaultAvatarUrls[Math.floor(Math.random() * config.twitch.defaultAvatarUrls.length)];
-        avatarCache.set(username, randomAvatar);
-        return randomAvatar;
-    }
-
-    // Check cache first
-    const cachedUrl = avatarCache.get(username);
-    if (cachedUrl && !skipCache) {
-        return cachedUrl;
-    }
-
-    // Fetch if not cached
-    const api_url = `https://api.ivr.fi/v2/twitch/user?login=${username}`;
-    const response = await fetch(api_url);
-    const data = await response.json();
-    const avatarUrl = data[0]["logo"];
-
-    // Cache the result
-    avatarCache.set(username, avatarUrl);
-
-    return avatarUrl;
-};
+import { getTwitchAvatar, getSyncAvatar } from './avatarService';
 
 export class TwitchChatService {
     private client: tmi.Client;
@@ -55,23 +19,23 @@ export class TwitchChatService {
 
         this.client.on('message', async (channel, tags, message, self) => {
             if (self) return;
-            console.log('Received message:', { channel, username: tags['display-name'], message });
+            // console.log('Received message:', { channel, username: tags['display-name'], message });
 
-            let updateAvatar = false;
-            if (message.toLowerCase() == "!changeavatar") {
-                updateAvatar = true;
+            let skipAvatarCache = false;
+            if (message.toLowerCase() == "!reloadavatar") {
+                skipAvatarCache = true;
             }
 
             const username = tags['display-name'] || tags.username;
             if (!username) return;
 
             try {
-                const avatarUrl = await getAvatarUrl(username, updateAvatar);
                 const existingUser = this.connectedUsers.get(tags['user-id'] || username);
                 const user: User = {
                     id: tags['user-id'] || username,
                     username: username,
-                    avatarUrl: avatarUrl,
+                    twitchAvatar: await getTwitchAvatar(username, skipAvatarCache),
+                    syncAvatar: await getSyncAvatar(username, skipAvatarCache),
                     position: existingUser?.position || {
                         x: Math.random() * (window.innerWidth - config.display.avatarSize),
                         y: Math.random() * (config.animation.movementRange.y.max - config.animation.movementRange.y.min) + config.animation.movementRange.y.min
@@ -79,7 +43,7 @@ export class TwitchChatService {
                     color: tags['color'] || existingUser?.color || '',
                     lastMessage: message
                 };
-                console.log('Created user object:', user);
+                console.log(`${existingUser ? 'Updated' : 'Created'} user object:`, user);
                 this.connectedUsers.set(user.id, user);
                 this.onUserMessage(user);
             } catch (error) {

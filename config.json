@@ -1,6 +1,6 @@
 {
     "twitch": {
-        "channel": "leafyzito",
+        "channel": "ryujei",
         "useTwitchAvatars": true,
         "defaultAvatarUrls": [
             "https://f.feridinha.com/sync/dancers/Avatar01_A.gif",
@@ -27,8 +27,9 @@
     "display": {
         "avatarSize": 45,
         "showUsernames": true,
+        "showTwitchAvatars": true,
         "showMessages": true,
-        "messageMaxLength": 200,
+        "messageMaxLength": 100,
         "messageDuration": 5000
     },
     "animation": {
@@ -47,6 +48,6 @@
         "tooltipBackground": "rgba(0, 0, 0, 0.8)",
         "messageBubbleBackground": "rgba(0, 0, 0, 0.8)",
         "overlayHeight": 100,
-        "overlayBottomPadding": 20
+        "overlayBottomPadding": 40
     }
 }

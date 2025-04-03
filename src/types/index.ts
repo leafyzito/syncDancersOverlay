@@ -1,7 +1,8 @@
 export interface User {
     id: string;
     username: string;
-    avatarUrl: string;
+    syncAvatar: string;
+    twitchAvatar: string;
     position: {
         x: number;
         y: number;
