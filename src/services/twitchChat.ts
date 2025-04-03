@@ -12,10 +12,14 @@ export class TwitchChatService {
         this.onUserMessage = onUserMessage;
         this.connectedUsers = new Map();
         const config = configService.getConfig();
+        // Get channel name from URL path
+        const channelName = window.location.pathname.substring(1);
+        const channel = channelName || config.twitch.channel; // Fallback to config if path is empty
 
         this.client = new tmi.Client({
-            channels: [config.twitch.channel]
+            channels: [channel]
         });
+        console.log('Connecting to channel:', channel);
 
         this.client.on('message', async (channel, tags, message, self) => {
             if (self) return;
