@@ -1,0 +1,52 @@
+{
+    "twitch": {
+        "channel": "leafyzito",
+        "useTwitchAvatars": true,
+        "defaultAvatarUrls": [
+            "https://f.feridinha.com/sync/dancers/Avatar01_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar02_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar03_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar04_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar05_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar06_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar07_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar08_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar09_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar10_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar11_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar12_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar13_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar14_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar15_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar16_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar17_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar18_A.gif",
+            "https://f.feridinha.com/sync/dancers/Avatar19_A.gif"
+        ]
+    },
+    "display": {
+        "avatarSize": 45,
+        "showUsernames": true,
+        "showMessages": true,
+        "messageMaxLength": 200,
+        "messageDuration": 5000
+    },
+    "animation": {
+        "movementInterval": 10000,
+        "movementRange": {
+            "y": {
+                "min": 0,
+                "max": 60
+            }
+        },
+        "transitionDuration": 3
+    },
+    "ui": {
+        "backgroundColor": "#1a1a1a",
+        "textColor": "#ffffff",
+        "tooltipBackground": "rgba(0, 0, 0, 0.8)",
+        "messageBubbleBackground": "rgba(0, 0, 0, 0.8)",
+        "overlayHeight": 100,
+        "overlayBottomPadding": 20
+    }
+}
