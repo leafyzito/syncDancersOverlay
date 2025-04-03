@@ -8,6 +8,7 @@ export interface User {
         y: number;
     };
     color: string;
+    lastMessageTimestamp: number;
     lastMessage?: string;
     lastMessageChannel?: string;
 } 

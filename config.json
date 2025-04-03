@@ -29,7 +29,9 @@
         "showTwitchAvatars": true,
         "showMessages": true,
         "messageMaxLength": 100,
-        "messageDuration": 5000
+        "messageDuration": 5000,
+        "deleteIdleUsers": true,
+        "deleteIdleUsersAfterSeconds": 15
     },
     "animation": {
         "movementInterval": 10000,

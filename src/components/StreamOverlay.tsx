@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { UserAvatar } from './UserAvatar';
-import { User } from '../types';
+import { User } from '../types/user.types';
 import { useState, useEffect } from 'react';
 import { TwitchChatService } from '../services/twitchChat';
 import { configService } from '../services/config';

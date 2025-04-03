@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User } from '../types';
+import { User } from '../types/user.types';
 import { configService } from '../services/config';
 import { useState, useEffect } from 'react';
 

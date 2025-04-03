@@ -12,6 +12,8 @@ export interface DisplayConfig {
     showMessages: boolean;
     messageMaxLength: number;
     messageDuration: number;
+    deleteIdleUsers: boolean;
+    deleteIdleUsersAfterSeconds: number;
 }
 
 export interface AnimationConfig {

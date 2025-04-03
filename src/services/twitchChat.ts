@@ -1,5 +1,5 @@
 import tmi from 'tmi.js';
-import { User } from '../types';
+import { User } from '../types/user.types';
 import { configService } from './config';
 import { getTwitchAvatar, getSyncAvatar } from './avatarService';
 import { ToastService } from './toastService';
@@ -69,6 +69,7 @@ export class TwitchChatService {
                     syncAvatar: await getSyncAvatar(username, skipAvatarCache),
                     position: existingUser?.position || getRandomPosition(),
                     color: tags['color'] || existingUser?.color || '',
+                    lastMessageTimestamp: Date.now(),
                     lastMessage: message,
                     lastMessageChannel: channel
                 };
