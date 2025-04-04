@@ -31,7 +31,7 @@
         "messageMaxLength": 100,
         "messageDuration": 5000,
         "deleteIdleUsers": false,
-        "deleteIdleUsersAfterSeconds": 15
+        "deleteIdleUsersAfterSeconds": 300
     },
     "animation": {
         "movementInterval": 10000,

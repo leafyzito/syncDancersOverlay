@@ -14,7 +14,77 @@ Um overlay personalizável para streams que exibe mensagens do chat da Twitch co
 
 ## Configuração
 
-O overlay pode ser personalizado através do arquivo `config.json`. Aqui está uma explicação das configurações disponíveis:
+O overlay é configurado principalmente através de parâmetros na URL. O arquivo `config.json` é usado apenas para valores padrão durante o desenvolvimento local.
+
+### Configuração via URL (Recomendado)
+
+Quando hospedado no GitHub Pages, você pode personalizar o overlay adicionando parâmetros à URL. Por exemplo:
+
+```
+https://leafyzito.github.io/syncDancersOverlay/?twitch.channel=seu_canal&display.avatarSize=60&ui.backgroundColor=%23ff0000
+```
+
+Os parâmetros seguem a estrutura do arquivo `config.json`, usando pontos (.) para acessar valores aninhados. Aqui estão alguns exemplos:
+
+#### Configurações da Twitch
+- `twitch.channel`: Nome do canal da Twitch
+- `twitch.customAvatarUrls`: URLs dos avatares customizados (separados por vírgula)
+
+#### Configurações de Exibição
+- `display.avatarSize`: Tamanho dos avatares em pixels
+- `display.showUsernames`: Mostrar nomes de usuário (true/false)
+- `display.showTwitchAvatars`: Mostrar avatares da Twitch (true/false)
+- `display.showMessages`: Mostrar balões de mensagem (true/false)
+- `display.messageMaxLength`: Comprimento máximo dos balões de mensagem
+- `display.messageDuration`: Tempo que as mensagens ficam visíveis (ms)
+- `display.deleteIdleUsers`: Remover usuários inativos (true/false)
+- `display.deleteIdleUsersAfterSeconds`: Tempo para remover usuários inativos (segundos)
+
+#### Configurações de Animação
+- `animation.movementInterval`: Frequência de movimento dos avatares (ms)
+- `animation.movementRange.y.min`: Movimento vertical mínimo
+- `animation.movementRange.y.max`: Movimento vertical máximo
+- `animation.transitionDuration`: Duração das animações (segundos)
+
+#### Configurações da Interface
+- `ui.backgroundColor`: Cor de fundo (hex ou rgba)
+- `ui.textColor`: Cor do texto (hex ou rgba)
+- `ui.tooltipBackground`: Cor de fundo do tooltip (hex ou rgba)
+- `ui.messageBubbleBackground`: Cor de fundo do balão de mensagem (hex ou rgba)
+- `ui.overlayHeight`: Altura da área do overlay
+- `ui.overlayBottomPadding`: Espaçamento a partir do fundo da tela
+- `ui.scale`: Escala do overlay
+
+### Exemplos de URLs
+
+1. Configuração básica com canal:
+```
+https://leafyzito.github.io/syncDancersOverlay/?twitch.channel=seu_canal
+```
+
+2. Configuração com cores personalizadas:
+```
+https://leafyzito.github.io/syncDancersOverlay/?twitch.channel=seu_canal&ui.backgroundColor=%231a1a1a&ui.textColor=%23ffffff
+```
+
+3. Configuração com tamanhos e animações personalizadas:
+```
+https://leafyzito.github.io/syncDancersOverlay/?twitch.channel=seu_canal&display.avatarSize=60&animation.movementInterval=5000&animation.movementRange.y.min=0&animation.movementRange.y.max=100
+```
+
+4. Configuração com avatares customizados:
+```
+https://leafyzito.github.io/syncDancersOverlay/?twitch.channel=seu_canal&twitch.customAvatarUrls=https://exemplo.com/avatar1.gif,https://exemplo.com/avatar2.gif
+```
+
+5. Configuração completa:
+```
+https://leafyzito.github.io/syncDancersOverlay/?twitch.channel=seu_canal&display.avatarSize=60&display.showUsernames=true&display.showMessages=true&display.messageDuration=5000&animation.movementInterval=10000&animation.transitionDuration=3&ui.backgroundColor=%231a1a1a&ui.textColor=%23ffffff&ui.scale=1.1
+```
+
+### Configuração via arquivo config.json (Apenas para desenvolvimento)
+
+Para desenvolvimento local, você pode usar o arquivo `config.json` para definir valores padrão. Estes valores serão sobrescritos por qualquer parâmetro na URL.
 
 ### Configurações da Twitch
 ```json
