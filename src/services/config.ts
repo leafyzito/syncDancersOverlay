@@ -54,6 +54,23 @@ class ConfigService {
     }
 
     private applyUrlParameters() {
+        // First handle customAvatarUrls specially by parsing the URL string directly
+        const url = window.location.href;
+        const customAvatarUrlsMatch = url.match(/twitch\.customAvatarUrls=([^&]+(?:&[^&]+)*)/);
+        if (customAvatarUrlsMatch) {
+            const urlsString = customAvatarUrlsMatch[1];
+            // Split by comma and handle any remaining & characters in the URLs
+            const urls = urlsString.split(',').map(url => {
+                // Replace any & that are part of the URL with their original form
+                return url.trim().replace(/&amp;/g, '&');
+            }).filter(url => url !== '');
+
+            this.config.twitch.customAvatarUrls = urls;
+            console.log('Parsed customAvatarUrls:', urls);
+            console.log('Number of custom avatar URLs found:', urls.length);
+        }
+
+        // Then handle all other parameters normally
         const params = new URLSearchParams(window.location.search);
 
         // Helper function to parse boolean values
@@ -107,8 +124,6 @@ class ConfigService {
             } else if (path[0] === 'twitch') {
                 if (path[1] === 'channel') {
                     parsedValue = value;
-                } else if (path[1] === 'customAvatarUrls') {
-                    parsedValue = value.split(',');
                 }
             }
 
