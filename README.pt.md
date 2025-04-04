@@ -31,12 +31,12 @@ Você pode personalizar tudo adicionando parâmetros à URL. Aqui estão todas a
 
 ### Configurações de Exibição
 - `display.avatarSize`: Tamanho do avatar em pixels (padrão: 45)
-- `display.showUsernames`: Mostrar/ocultar nomes de usuário (true/false)
-- `display.showTwitchAvatars`: Mostrar/ocultar avatares da Twitch (true/false)
-- `display.showMessages`: Mostrar/ocultar balões de mensagem (true/false)
+- `display.showUsernames`: Mostrar/ocultar nomes de usuário (true/false) (padrão: true)
+- `display.showTwitchAvatars`: Mostrar/ocultar avatares da Twitch (true/false) (padrão: false)
+- `display.showMessages`: Mostrar/ocultar balões de mensagem (true/false) (padrão: true)
 - `display.messageMaxLength`: Comprimento máximo das mensagens (padrão: 100)
 - `display.messageDuration`: Quanto tempo as mensagens permanecem visíveis em milissegundos (padrão: 5000)
-- `display.deleteIdleUsers`: Remover usuários inativos automaticamente (true/false)
+- `display.deleteIdleUsers`: Remover usuários inativos automaticamente (true/false) (padrão: true)
 - `display.deleteIdleUsersAfterSeconds`: Tempo antes de remover usuários inativos em segundos (padrão: 120)
 
 ### Configurações de Animação
@@ -52,7 +52,7 @@ Você pode personalizar tudo adicionando parâmetros à URL. Aqui estão todas a
 - `ui.messageBubbleBackground`: Cor de fundo do balão de mensagem (use rgba como rgba(0, 0, 0, 0.8))
 - `ui.overlayHeight`: Altura da área de sobreposição em pixels (padrão: 100)
 - `ui.overlayBottomPadding`: Espaço da parte inferior da tela em pixels (padrão: 40)
-- `ui.scale`: Multiplicador de tamanho geral (1.0 = normal, 1.5 = 50% maior)
+- `ui.scale`: Multiplicador de tamanho geral (1.0 = normal, 1.5 = 50% maior) (padrão: 1.1)
 
 ### Exemplos de URLs
 
@@ -78,7 +78,7 @@ https://leafyzito.github.io/syncDancersOverlay/?twitch.channel=seu_canal&display
 
 ## Comandos do Chat
 
-- `!reloadavatar` - Atualiza seu avatar
+- `!reloadavatar` - Atualiza o avatar do usuário
 
 ## Como Funciona
 

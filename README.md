@@ -31,12 +31,12 @@ You can customize everything by adding parameters to the URL. Here are all avail
 
 ### Display Settings
 - `display.avatarSize`: Avatar size in pixels (default: 45)
-- `display.showUsernames`: Show/hide usernames (true/false)
-- `display.showTwitchAvatars`: Show/hide Twitch avatars (true/false)
-- `display.showMessages`: Show/hide message bubbles (true/false)
+- `display.showUsernames`: Show/hide usernames (true/false) (default: true)
+- `display.showTwitchAvatars`: Show/hide Twitch avatars (true/false) (default: false)
+- `display.showMessages`: Show/hide message bubbles (true/false) (default: true)
 - `display.messageMaxLength`: Maximum length of messages (default: 100)
 - `display.messageDuration`: How long messages stay visible in milliseconds (default: 5000)
-- `display.deleteIdleUsers`: Remove inactive users automatically (true/false)
+- `display.deleteIdleUsers`: Remove inactive users automatically (true/false) (default: true)
 - `display.deleteIdleUsersAfterSeconds`: Time before removing inactive users in seconds (default: 120)
 
 ### Animation Settings
@@ -52,7 +52,7 @@ You can customize everything by adding parameters to the URL. Here are all avail
 - `ui.messageBubbleBackground`: Message bubble background color (use rgba like rgba(0, 0, 0, 0.8))
 - `ui.overlayHeight`: Height of the overlay area in pixels (default: 100)
 - `ui.overlayBottomPadding`: Space from bottom of screen in pixels (default: 40)
-- `ui.scale`: Overall size multiplier (1.0 = normal, 1.5 = 50% larger)
+- `ui.scale`: Overall size multiplier (1.0 = normal, 1.5 = 50% larger) (default: 1.1)
 
 ### Example URLs
 
@@ -78,7 +78,7 @@ https://leafyzito.github.io/syncDancersOverlay/?twitch.channel=your_channel&disp
 
 ## Chat Commands
 
-- `!reloadavatar` - Refreshes your avatar
+- `!reloadavatar` - Refreshes the user's avatar
 
 ## How It Works
 
