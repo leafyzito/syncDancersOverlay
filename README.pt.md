@@ -1,5 +1,8 @@
 # Sobreposição de Stream
 
+[![en](https://img.shields.io/badge/lang-en-red.svg)](README.md)
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](README.pt.md)
+
 Uma bela e personalizável sobreposição para sua transmissão na Twitch que dá vida ao seu chat com avatares e mensagens animadas.
 
 ## O Que Faz

@@ -1,5 +1,8 @@
 # Stream Overlay
 
+[![en](https://img.shields.io/badge/lang-en-red.svg)](README.md)
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](README.pt.md)
+
 A beautiful and customizable overlay for your Twitch stream that brings your chat to life with animated avatars and messages.
 
 ## What It Does
