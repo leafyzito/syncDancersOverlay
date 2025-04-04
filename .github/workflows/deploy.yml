@@ -1,10 +1,10 @@
 name: Deploy to GitHub Pages
 
-# Trigger deployment on push to pagesHost branch
+# Trigger deployment on push to main branch
 on:
   push:
     branches:
-      - pagesHost
+      - main
 
 permissions:
   contents: write
