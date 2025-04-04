@@ -21,12 +21,12 @@ export class TwitchChatService {
         this.connectedUsers = new Map();
         this.toastService = ToastService.getInstance();
         const config = configService.getConfig();
-        // Get channel name from URL path
-        const channelName = window.location.pathname.substring(1);
-        const channel = channelName || config.twitch.channel; // Fallback to config if path is empty
 
-        if (!channel) {
-            this.toastService.show('No channel name provided. Provide a channel by adding /channelName to the url', 'error', 15000);
+        const channel = config.twitch.channel;
+        if (!channel || channel === 'default') {
+            this.toastService.show('No channel name provided. Provide a channel by adding /?twitch.channel=channelName to the url', 'error', 300000000);
+            // example: https://leafyzito.github.io/syncDancersOverlay/?twitch.channel=leafyzito
+            this.toastService.show('Example: https://leafyzito.github.io/syncDancersOverlay/?twitch.channel=leafyzito', 'info', 300000000);
             // return;
         }
 

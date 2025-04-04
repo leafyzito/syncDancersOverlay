@@ -1,6 +1,6 @@
 {
     "twitch": {
-        "channel": "your_channel_name",
+        "channel": "",
         "customAvatarUrls": [
             "https://example.com/avatars/avatar1.gif",
             "https://example.com/avatars/avatar2.gif",
