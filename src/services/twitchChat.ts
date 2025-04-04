@@ -23,9 +23,11 @@ export class TwitchChatService {
         const config = configService.getConfig();
 
         const channel = config.twitch.channel;
-        if (!channel) {
-            this.toastService.show('No channel name provided. Provide a channel by adding ?twitch.channel=channelName to the url', 'error', 15000);
-            return;
+        if (!channel || channel === 'default') {
+            this.toastService.show('No channel name provided. Provide a channel by adding /?twitch.channel=channelName to the url', 'error', 300000000);
+            // example: https://leafyzito.github.io/syncDancersOverlay/?twitch.channel=leafyzito
+            this.toastService.show('Example: https://leafyzito.github.io/syncDancersOverlay/?twitch.channel=leafyzito', 'info', 300000000);
+            // return;
         }
 
         this.client = new tmi.Client({
