@@ -37,7 +37,7 @@ You can customize everything by adding parameters to the URL. Here are all avail
 - `display.messageMaxLength`: Maximum length of messages (default: 100)
 - `display.messageDuration`: How long messages stay visible in milliseconds (default: 5000)
 - `display.deleteIdleUsers`: Remove inactive users automatically (true/false)
-- `display.deleteIdleUsersAfterSeconds`: Time before removing inactive users in seconds (default: 300)
+- `display.deleteIdleUsersAfterSeconds`: Time before removing inactive users in seconds (default: 120)
 
 ### Animation Settings
 - `animation.movementInterval`: How often avatars move in milliseconds (default: 10000)

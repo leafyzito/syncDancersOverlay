@@ -37,7 +37,7 @@ Você pode personalizar tudo adicionando parâmetros à URL. Aqui estão todas a
 - `display.messageMaxLength`: Comprimento máximo das mensagens (padrão: 100)
 - `display.messageDuration`: Quanto tempo as mensagens permanecem visíveis em milissegundos (padrão: 5000)
 - `display.deleteIdleUsers`: Remover usuários inativos automaticamente (true/false)
-- `display.deleteIdleUsersAfterSeconds`: Tempo antes de remover usuários inativos em segundos (padrão: 300)
+- `display.deleteIdleUsersAfterSeconds`: Tempo antes de remover usuários inativos em segundos (padrão: 120)
 
 ### Configurações de Animação
 - `animation.movementInterval`: Frequência de movimento dos avatares em milissegundos (padrão: 10000)

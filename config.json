@@ -26,12 +26,12 @@
     "display": {
         "avatarSize": 45,
         "showUsernames": true,
-        "showTwitchAvatars": true,
+        "showTwitchAvatars": false,
         "showMessages": true,
         "messageMaxLength": 100,
         "messageDuration": 5000,
-        "deleteIdleUsers": false,
-        "deleteIdleUsersAfterSeconds": 300
+        "deleteIdleUsers": true,
+        "deleteIdleUsersAfterSeconds": 120
     },
     "animation": {
         "movementInterval": 10000,
