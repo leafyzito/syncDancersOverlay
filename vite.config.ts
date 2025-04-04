@@ -6,10 +6,11 @@ export default defineConfig({
   plugins: [react()],
   base: './',
   build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
     rollupOptions: {
       input: {
-        main: './index.html',
-        channel: './index.html'
+        main: './index.html'
       }
     }
   }
