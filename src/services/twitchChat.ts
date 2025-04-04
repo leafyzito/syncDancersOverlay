@@ -21,13 +21,14 @@ export class TwitchChatService {
         this.connectedUsers = new Map();
         this.toastService = ToastService.getInstance();
         const config = configService.getConfig();
-        // Get channel name from URL path
-        const channelName = window.location.pathname.substring(1);
-        const channel = channelName || config.twitch.channel; // Fallback to config if path is empty
+
+        // Get channel name from URL path, handling GitHub Pages structure
+        const pathParts = window.location.pathname.split('/').filter(Boolean);
+        const channelName = pathParts.length > 1 ? pathParts[1] : null;
+        const channel = channelName || config.twitch.channel;
 
         if (!channel) {
             this.toastService.show('No channel name provided. Provide a channel by adding /channelName to the url', 'error', 15000);
-            // return;
         }
 
         this.client = new tmi.Client({
