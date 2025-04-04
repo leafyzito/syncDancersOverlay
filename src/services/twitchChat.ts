@@ -7,7 +7,7 @@ import { getRandomPosition } from '../utils/position';
 
 export class TwitchChatService {
     private static instance: TwitchChatService | null = null;
-    private client: tmi.Client;
+    private client: tmi.Client = new tmi.Client({ channels: [] });
     private onUserMessage: (user: User) => void;
     private connectedUsers: Map<string, User>;
     private toastService: ToastService;
@@ -25,6 +25,11 @@ export class TwitchChatService {
         const channelName = window.location.pathname.substring(1);
         const channel = channelName || config.twitch.channel; // Fallback to config if path is empty
 
+        if (!channel) {
+            this.toastService.show('No channel name provided. Provide a channel by adding /channelName to the url', 'error', 15000);
+            // return;
+        }
+
         this.client = new tmi.Client({
             channels: [channel]
         });
@@ -33,7 +38,7 @@ export class TwitchChatService {
         this.client.connect().catch(
             (error) => {
                 console.error('Error connecting to Twitch:', error);
-                // this.toastService.show(`Error connecting to Twitch: ${error.message}`, 'error');
+                this.toastService.show(`Error connecting to Twitch: ${error.message}`, 'error');
             }
         );
 

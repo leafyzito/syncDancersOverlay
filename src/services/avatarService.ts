@@ -21,6 +21,17 @@ export const getTwitchAvatar = async (username: string, skipCache: boolean = fal
         return cachedTwitchAvatar;
     }
 
+    // If the twitch client id and oauth token are not set, use the ivr.fi api
+    if (!import.meta.env.VITE_TWITCH_CLIENT_ID || !import.meta.env.VITE_TWITCH_OAUTH_TOKEN) {
+        const api_url = `https://api.ivr.fi/v2/twitch/user?login=${username}`;
+        const response = await fetch(api_url);
+        const data = await response.json();
+        const twitchAvatar = data[0]["logo"];
+        twitchAvatarCache.set(username, twitchAvatar);
+        return twitchAvatar;
+    }
+
+    // If the twitch client id and oauth token are set, use the twitch api
     const api_url = `https://api.twitch.tv/helix/users?login=${username}`;
     const response = await fetch(api_url, {
         headers: {
