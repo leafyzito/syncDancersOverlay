@@ -22,12 +22,12 @@ export class TwitchChatService {
         this.toastService = ToastService.getInstance();
         const config = configService.getConfig();
 
-        // Get channel name from URL hash
-        const hash = window.location.hash.substring(1);
-        const channel = hash || config.twitch.channel || 'default';
+        // Get channel name from URL query parameter
+        const params = new URLSearchParams(window.location.search);
+        const channel = params.get('channel') || config.twitch.channel || 'default';
 
         if (!channel) {
-            this.toastService.show('No channel name provided. Provide a channel by adding #channelName to the url', 'error', 15000);
+            this.toastService.show('No channel name provided. Provide a channel by adding ?channel=channelName to the url', 'error', 15000);
         }
 
         this.client = new tmi.Client({
