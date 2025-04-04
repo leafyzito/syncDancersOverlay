@@ -22,10 +22,12 @@ export class TwitchChatService {
         this.toastService = ToastService.getInstance();
         const config = configService.getConfig();
 
-        // Get channel name from URL path, handling GitHub Pages structure
+        // Get channel name from URL path or query parameter
         const pathParts = window.location.pathname.split('/').filter(Boolean);
-        const channelName = pathParts.length > 1 ? pathParts[1] : null;
-        const channel = channelName || config.twitch.channel;
+        const queryParams = new URLSearchParams(window.location.search);
+        const channelName = pathParts.length > 1 ? pathParts[1] :
+            queryParams.get('/') || null;
+        const channel = channelName || config.twitch.channel || 'default';
 
         if (!channel) {
             this.toastService.show('No channel name provided. Provide a channel by adding /channelName to the url', 'error', 15000);
