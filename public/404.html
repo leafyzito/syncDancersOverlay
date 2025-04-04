@@ -9,13 +9,12 @@
         // Handle client-side routing for GitHub Pages
         (function () {
             var path = window.location.pathname;
+            // If we're on the correct path, let the app handle it
             if (path.startsWith('/syncDancersOverlay/')) {
-                // If we're already on the correct path, just reload the page
-                window.location.reload();
-            } else {
-                // Otherwise, redirect to the correct path
-                window.location.href = '/syncDancersOverlay' + path;
+                return;
             }
+            // Otherwise, redirect to the correct path
+            window.location.href = '/syncDancersOverlay' + path;
         })();
     </script>
 </head>
