@@ -16,6 +16,11 @@ export const getSyncAvatar = async (username: string, skipCache: boolean = false
 }
 
 export const getTwitchAvatar = async (username: string, skipCache: boolean = false) => {
+    // if showTwitchAvatars is false, return null
+    if (!configService.getConfig().display.showTwitchAvatars) {
+        return null;
+    }
+
     const cachedTwitchAvatar = twitchAvatarCache.get(username);
     if (cachedTwitchAvatar && !skipCache) {
         return cachedTwitchAvatar;

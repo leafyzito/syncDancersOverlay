@@ -56,6 +56,8 @@ class ConfigService {
     private applyUrlParameters() {
         // First handle customAvatarUrls specially by parsing the URL string directly
         const url = window.location.href;
+        console.log('Processing URL:', url);
+
         const customAvatarUrlsMatch = url.match(/twitch\.customAvatarUrls=([^&]+(?:&[^&]+)*)/);
         if (customAvatarUrlsMatch) {
             const urlsString = customAvatarUrlsMatch[1];
@@ -72,11 +74,16 @@ class ConfigService {
 
         // Then handle all other parameters normally
         const params = new URLSearchParams(window.location.search);
+        console.log('URL Parameters:', Object.fromEntries(params.entries()));
 
         // Helper function to parse boolean values
         const parseBoolean = (value: string | null): boolean | undefined => {
             if (value === null) return undefined;
-            return value.toLowerCase() === 'true';
+            const lowerValue = value.toLowerCase();
+            console.log('Parsing boolean value:', value, 'to', lowerValue);
+            if (lowerValue === 'true') return true;
+            if (lowerValue === 'false') return false;
+            return undefined;
         };
 
         // Helper function to parse number values
@@ -104,7 +111,20 @@ class ConfigService {
                 if (!current[path[i]]) current[path[i]] = {};
                 current = current[path[i]];
             }
+            console.log('Setting config value:', path.join('.'), 'to', value);
             current[path[path.length - 1]] = value;
+        };
+
+        // Helper function to determine if a config path should be a boolean
+        const isBooleanConfig = (path: string[]): boolean => {
+            if (path.length !== 2) return false;
+
+            const [section, key] = path;
+            if (section === 'display') {
+                const displayConfig = this.config.display as Record<string, any>;
+                return typeof displayConfig[key] === 'boolean';
+            }
+            return false;
         };
 
         // Parse all URL parameters
@@ -114,8 +134,9 @@ class ConfigService {
 
             // Determine the type of value based on the path
             if (path[0] === 'display' || path[0] === 'animation' || path[0] === 'ui') {
-                if (path.includes('show') || path.includes('deleteIdleUsers')) {
+                if (isBooleanConfig(path)) {
                     parsedValue = parseBoolean(value);
+                    console.log('Parsed boolean parameter:', key, '=', parsedValue);
                 } else if (path.includes('Color') || path.includes('Background')) {
                     parsedValue = parseColor(value);
                 } else {
@@ -133,7 +154,7 @@ class ConfigService {
         });
 
         // Log the final configuration for debugging
-        console.log('Final configuration:', this.config);
+        console.log('Final configuration:', JSON.stringify(this.config, null, 2));
     }
 
     public static getInstance(): ConfigService {
