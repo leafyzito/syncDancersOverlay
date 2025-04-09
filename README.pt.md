@@ -48,7 +48,6 @@ Você pode personalizar tudo adicionando parâmetros à URL. Aqui estão todas a
 ### Configurações de Aparência
 - `ui.backgroundColor`: Cor de fundo (use códigos hex como #1a1a1a)
 - `ui.textColor`: Cor do texto (use códigos hex como #ffffff)
-- `ui.tooltipBackground`: Cor de fundo da dica de ferramenta (use rgba como rgba(0, 0, 0, 0.8))
 - `ui.messageBubbleBackground`: Cor de fundo do balão de mensagem (use rgba como rgba(0, 0, 0, 0.8))
 - `ui.overlayHeight`: Altura da área de sobreposição em pixels (padrão: 100)
 - `ui.overlayBottomPadding`: Espaço da parte inferior da tela em pixels (padrão: 40)

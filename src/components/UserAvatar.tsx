@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User } from '../types/user.types';
 import { configService } from '../services/config';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const AvatarContainer = styled(motion.div) <{ avatarSize: number }>`
   position: absolute;
@@ -12,7 +12,6 @@ const AvatarContainer = styled(motion.div) <{ avatarSize: number }>`
   overflow: visible;
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 1;
 `;
 
 const AvatarImage = styled.img`
@@ -22,15 +21,13 @@ const AvatarImage = styled.img`
   border-radius: 50%;
 `;
 
-const UsernameTooltip = styled.div<{ tooltipBackground: string; textColor: string }>`
+const UsernameTooltip = styled.div<{ $textColor: string }>`
   position: absolute;
-  bottom: -30px;
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: ${props => props.tooltipBackground};
-  color: ${props => props.textColor};
+  color: ${props => props.$textColor};
   padding: 4px 8px;
-  border-radius: 100px; 
   font-size: 12px;
   white-space: nowrap;
   pointer-events: none;
@@ -38,6 +35,11 @@ const UsernameTooltip = styled.div<{ tooltipBackground: string; textColor: strin
   display: flex;
   align-items: center;
   gap: 4px;
+  text-shadow: 
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
 `;
 
 const TooltipTwitchAvatar = styled.img`
@@ -49,7 +51,7 @@ const TooltipTwitchAvatar = styled.img`
 
 const MessageBubble = styled(motion.div) <{ messageBubbleBackground: string; textColor: string }>`
   position: absolute;
-  bottom: 80%;
+  bottom: 120%;
   left: 40px;
   transform: translateX(-20%);
   background-color: ${props => props.messageBubbleBackground};
@@ -84,39 +86,72 @@ interface UserAvatarProps {
 
 export const UserAvatar = ({ user }: UserAvatarProps) => {
     const [showMessage, setShowMessage] = useState(false);
+    const [shouldJump, setShouldJump] = useState(false);
     const config = configService.getConfig();
+    const timersRef = useRef<{ messageTimer?: ReturnType<typeof setTimeout>; jumpTimer?: ReturnType<typeof setTimeout> }>({});
 
     useEffect(() => {
+        // Clear any existing timers
+        if (timersRef.current.messageTimer) {
+            clearTimeout(timersRef.current.messageTimer);
+        }
+        if (timersRef.current.jumpTimer) {
+            clearTimeout(timersRef.current.jumpTimer);
+        }
+
+        // Show message and jump if there's a message
         if (user.lastMessage) {
             setShowMessage(true);
-            const timer = setTimeout(() => {
+            setShouldJump(true);
+
+            timersRef.current.messageTimer = setTimeout(() => {
                 setShowMessage(false);
             }, config.display.messageDuration);
-            return () => clearTimeout(timer);
+
+            timersRef.current.jumpTimer = setTimeout(() => {
+                setShouldJump(false);
+            }, 100); // Jump animation duration
         }
-    }, [user.lastMessage, config.display.messageDuration]);
+
+        // Cleanup function
+        return () => {
+            if (timersRef.current.messageTimer) {
+                clearTimeout(timersRef.current.messageTimer);
+            }
+            if (timersRef.current.jumpTimer) {
+                clearTimeout(timersRef.current.jumpTimer);
+            }
+            setShowMessage(false);
+            setShouldJump(false);
+        };
+    }, [user.lastMessage]); // Depend on lastMessage to trigger on every new message
 
     return (
         <AvatarContainer
             avatarSize={config.display.avatarSize}
-            initial={{ scale: 0 }}
+            initial={{ x: user.position.x, y: window.innerHeight }}
             animate={{
-                scale: 1,
                 x: user.position.x,
-                y: user.position.y
+                y: user.animationDone ? user.position.y : (shouldJump ? user.position.y - 20 : user.position.y)
             }}
             exit={{
-                scale: 0,
+                y: window.innerHeight,
                 opacity: 0,
-                transition: { duration: 0.5 }
+                transition: {
+                    duration: config.animation.transitionDuration,
+                    ease: "easeOut"
+                }
             }}
-            transition={{ duration: config.animation.transitionDuration }}
+            transition={{
+                duration: config.animation.transitionDuration,
+                ease: [0.16, 1, 0.3, 1], // Custom easing for smooth deceleration
+                y: { type: "spring", stiffness: 200, damping: 18 }
+            }}
         >
             <AvatarImage src={user.syncAvatar} alt={user.username + "'Sync avatar"} />
             {config.display.showUsernames && (
                 <UsernameTooltip
-                    tooltipBackground={config.ui.tooltipBackground}
-                    textColor={config.ui.textColor}
+                    $textColor={config.ui.textColor}
                     style={{
                         color: user.color || config.ui.textColor,
                         fontWeight: '500'

@@ -61,6 +61,7 @@ export const StreamOverlay = () => {
 
     // Move avatars based on configured interval
     useEffect(() => {
+        if (!config.animation.avatarMovement) return undefined;
         const interval = setInterval(moveAvatars, config.animation.movementInterval);
         return () => clearInterval(interval);
     }, []);
@@ -84,9 +85,12 @@ export const StreamOverlay = () => {
     return (
         <OverlayContainer theme={config.ui}>
             <AnimatePresence>
-                {users.map(user => (
-                    <UserAvatar key={user.id} user={user} />
-                ))}
+                {/* Sort by lastMessageTimestamp in ascending order so most recent appears on top */}
+                {[...users]
+                    .sort((a, b) => (a.lastMessageTimestamp || 0) - (b.lastMessageTimestamp || 0))
+                    .map(user => (
+                        <UserAvatar key={user.id} user={user} />
+                    ))}
             </AnimatePresence>
         </OverlayContainer>
     );

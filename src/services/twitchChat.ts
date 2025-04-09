@@ -62,6 +62,13 @@ export class TwitchChatService {
                 skipAvatarCache = true;
             }
 
+            if (message.toLowerCase() == "!moveavatar") {
+                const userId = tags['user-id'] || tags.username;
+                if (userId) {
+                    this.moveAvatar(userId);
+                }
+            }
+
             const username = tags['display-name'] || tags.username;
             if (!username) return;
 
@@ -106,5 +113,13 @@ export class TwitchChatService {
 
     public getConnectedUsers(): User[] {
         return Array.from(this.connectedUsers.values());
+    }
+
+    public moveAvatar(userId: string) {
+        const users = this.getConnectedUsers();
+        const user = users.find(user => user.id === userId);
+        if (user) {
+            user.position = getRandomPosition();
+        }
     }
 }

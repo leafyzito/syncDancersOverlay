@@ -48,7 +48,6 @@ You can customize everything by adding parameters to the URL. Here are all avail
 ### Appearance Settings
 - `ui.backgroundColor`: Background color (use hex codes like #1a1a1a)
 - `ui.textColor`: Text color (use hex codes like #ffffff)
-- `ui.tooltipBackground`: Tooltip background color (use rgba like rgba(0, 0, 0, 0.8))
 - `ui.messageBubbleBackground`: Message bubble background color (use rgba like rgba(0, 0, 0, 0.8))
 - `ui.overlayHeight`: Height of the overlay area in pixels (default: 100)
 - `ui.overlayBottomPadding`: Space from bottom of screen in pixels (default: 40)

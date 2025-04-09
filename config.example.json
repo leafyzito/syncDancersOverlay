@@ -30,7 +30,6 @@
     "ui": {
         "backgroundColor": "#1a1a1a",
         "textColor": "#ffffff",
-        "tooltipBackground": "rgba(0, 0, 0, 0.8)",
         "messageBubbleBackground": "rgba(0, 0, 0, 0.8)",
         "overlayHeight": 100,
         "overlayBottomPadding": 40,

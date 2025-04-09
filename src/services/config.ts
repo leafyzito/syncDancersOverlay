@@ -17,6 +17,7 @@ export interface DisplayConfig {
 }
 
 export interface AnimationConfig {
+    avatarMovement: boolean;
     movementInterval: number;
     movementRange: {
         y: { min: number; max: number };
@@ -27,7 +28,6 @@ export interface AnimationConfig {
 export interface UIConfig {
     backgroundColor: string;
     textColor: string;
-    tooltipBackground: string;
     messageBubbleBackground: string;
     overlayHeight: number;
     overlayBottomPadding: number;
@@ -120,9 +120,9 @@ class ConfigService {
             if (path.length !== 2) return false;
 
             const [section, key] = path;
-            if (section === 'display') {
-                const displayConfig = this.config.display as Record<string, any>;
-                return typeof displayConfig[key] === 'boolean';
+            if (section === 'display' || section === 'animation') {
+                const config = this.config[section] as Record<string, any>;
+                return typeof config[key] === 'boolean';
             }
             return false;
         };

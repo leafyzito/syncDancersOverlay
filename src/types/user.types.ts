@@ -11,4 +11,5 @@ export interface User {
     lastMessageTimestamp: number;
     lastMessage?: string;
     lastMessageChannel?: string;
+    animationDone?: boolean;
 } 
