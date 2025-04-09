@@ -145,6 +145,7 @@ ${JSON.stringify(T,null,4)}`);break}},S.prototype.connect=function(){return new 
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: transparent;
 `,JM=Mn.div`
   text-align: center;
   z-index: 1;
