@@ -42,15 +42,15 @@ You can customize everything by adding parameters to the URL. Here are all avail
 ### Animation Settings
 - `animation.movementInterval`: How often avatars move in milliseconds (default: 10000)
 - `animation.movementRange.y.min`: Minimum vertical movement (default: 0)
-- `animation.movementRange.y.max`: Maximum vertical movement (default: 60)
+- `animation.movementRange.y.max`: Maximum vertical movement (default: 0)
 - `animation.transitionDuration`: How long animations take in seconds (default: 3)
 
 ### Appearance Settings
 - `ui.backgroundColor`: Background color (use hex codes like #1a1a1a)
 - `ui.textColor`: Text color (use hex codes like #ffffff)
 - `ui.messageBubbleBackground`: Message bubble background color (use rgba like rgba(0, 0, 0, 0.8))
-- `ui.overlayHeight`: Height of the overlay area in pixels (default: 100)
-- `ui.overlayBottomPadding`: Space from bottom of screen in pixels (default: 40)
+- `ui.overlayHeight`: Height of the overlay area in pixels (default: 50)
+- `ui.overlayBottomPadding`: Space from bottom of screen in pixels (default: 0)
 - `ui.scale`: Overall size multiplier (1.0 = normal, 1.5 = 50% larger) (default: 1.1)
 
 ### Example URLs
@@ -78,6 +78,7 @@ https://leafyzito.github.io/syncDancersOverlay/?twitch.channel=your_channel&disp
 ## Chat Commands
 
 - `!reloadavatar` - Refreshes the user's avatar
+- `!moveavatar` - Moves the user's avatar to a new random position
 
 ## How It Works
 

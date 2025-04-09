@@ -18,11 +18,12 @@
         "deleteIdleUsersAfterSeconds": 60
     },
     "animation": {
+        "avatarMovement": true,
         "movementInterval": 10000,
         "movementRange": {
             "y": {
                 "min": 0,
-                "max": 60
+                "max": 0
             }
         },
         "transitionDuration": 3
@@ -31,8 +32,8 @@
         "backgroundColor": "#1a1a1a",
         "textColor": "#ffffff",
         "messageBubbleBackground": "rgba(0, 0, 0, 0.8)",
-        "overlayHeight": 100,
-        "overlayBottomPadding": 40,
+        "overlayHeight": 50,
+        "overlayBottomPadding": 0,
         "scale": 1.1
     }
 }
